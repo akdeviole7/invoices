@@ -1,0 +1,69 @@
+####################################
+# OS / Editor
+####################################
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+####################################
+# Logs
+####################################
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+####################################
+# ENV FILES (NEVER COMMIT)
+####################################
+.env
+.env.*
+!.env.example
+
+####################################
+# Node / JS (GLOBAL)
+####################################
+node_modules/
+npm-cache/
+.yarn/
+.pnpm-store/
+
+####################################
+# FRONTEND (React / Vite / CRA)
+####################################
+front/node_modules/
+front/build/
+front/dist/
+front/.env
+front/.env.*
+
+####################################
+# BACKEND (Node / API)
+####################################
+back/node_modules/
+back/dist/
+back/build/
+back/.env
+back/.env.*
+
+####################################
+# Tests / Coverage
+####################################
+coverage/
+*.lcov
+
+####################################
+# Temporary / Runtime
+####################################
+tmp/
+temp/
+.cache/
+
+####################################
+# GitHub Actions (ALLOW)
+####################################
+!.github/

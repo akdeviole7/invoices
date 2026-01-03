@@ -15,5 +15,8 @@ export default defineConfig({
       },
     },
     allowedHosts: ['.aict.pro'],
+    optimizeDeps: {
+      force: true  // Force re-optimization on every start
+    }
   },
 });

@@ -44,7 +44,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
-// Error handler newly
+// Error handler newly add
 app.use(errorHandler);
 
 app.listen(PORT, () => {

@@ -1,0 +1,50 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "back/**"
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: back/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: back
+        run: npm ci
+
+      - name: Deploy backend to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+
+            su - codra << 'EOF'
+              set -e
+              cd /home/codra/apps/invoices/back
+
+              git pull origin main
+              npm ci
+
+              pm2 restart invoices-api || pm2 start src/server.js --name invoices-api
+              pm2 save
+            EOF
+
+            nginx -t
+            systemctl reload nginx

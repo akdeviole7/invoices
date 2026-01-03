@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
+    host: true,
     port: 3001,
     proxy: {
       '/api': {
@@ -13,5 +14,6 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    allowedHosts: ['.aict.pro'],
   },
 });

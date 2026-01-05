@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:5001/api';
-
+const PREFIX_URL= "/api";
 const api = axios.create({
-  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -11,29 +9,29 @@ const api = axios.create({
 
 // Invoices
 export const invoiceAPI = {
-  getAll: (params) => api.get('/invoices', { params }),
-  getById: (id) => api.get(`/invoices/${id}`),
-  create: (data) => api.post('/invoices', data),
-  update: (id, data) => api.put(`/invoices/${id}`, data),
-  delete: (id) => api.delete(`/invoices/${id}`),
+  getAll: (params) => api.get(`${PREFIX_URL}/invoices`, { params }),
+  getById: (id) => api.get(`${PREFIX_URL}/invoices/${id}`),
+  create: (data) => api.post(`${PREFIX_URL}/invoices`, data),
+  update: (id, data) => api.put(`${PREFIX_URL}/invoices/${id}`, data),
+  delete: (id) => api.delete(`${PREFIX_URL}/invoices/${id}`),
 };
 
 // Clients
 export const clientAPI = {
-  getAll: () => api.get('/clients'),
-  getById: (id) => api.get(`/clients/${id}`),
-  create: (data) => api.post('/clients', data),
-  update: (id, data) => api.put(`/clients/${id}`, data),
-  delete: (id) => api.delete(`/clients/${id}`),
+  getAll: () => api.get(`${PREFIX_URL}/clients`),
+  getById: (id) => api.get(`${PREFIX_URL}/clients/${id}`),
+  create: (data) => api.post(`${PREFIX_URL}/clients`, data),
+  update: (id, data) => api.put(`${PREFIX_URL}/clients/${id}`, data),
+  delete: (id) => api.delete(`${PREFIX_URL}/clients/${id}`),
 };
 
 // Templates
 export const templateAPI = {
-  getAll: () => api.get('/templates'),
-  getById: (id) => api.get(`/templates/${id}`),
-  create: (data) => api.post('/templates', data),
-  update: (id, data) => api.put(`/templates/${id}`, data),
-  delete: (id) => api.delete(`/templates/${id}`),
+  getAll: () => api.get(`${PREFIX_URL}/templates`),
+  getById: (id) => api.get(`${PREFIX_URL}/templates/${id}`),
+  create: (data) => api.post(`${PREFIX_URL}/templates`, data),
+  update: (id, data) => api.put(`${PREFIX_URL}/templates/${id}`, data),
+  delete: (id) => api.delete(`${PREFIX_URL}/templates/${id}`),
 };
 
 export default api;

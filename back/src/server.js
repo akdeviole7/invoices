@@ -1,6 +1,4 @@
 // server.js
-// Moved error handler to separate file.
-// No other changes.
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -9,10 +7,10 @@ import logger from './config/logger.js';
 import invoiceRoutes from './routes/invoices.js';
 import clientRoutes from './routes/clients.js';
 import templateRoutes from './routes/templates.js';
+import pdfRoutes from './routes/pdf.js';
 import errorHandler from './middleware/errorHandler.js';
-// hello
-dotenv.config();
 
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -39,14 +37,14 @@ app.use((req, res, next) => {
 app.use('/api/invoices', invoiceRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/templates', templateRoutes);
+app.use('/api/pdf', pdfRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
-
-// Error handler newly add
+// Error handler
 app.use(errorHandler);
 
 app.listen(PORT, () => {
